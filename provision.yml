@@ -1,0 +1,55 @@
+---
+- hosts: all  # this is for vagrant only
+  become: true
+  tasks:
+    - name: "[Base] - install epel-release"
+      yum:
+        name: epel-release
+        state: latest
+        update_cache: true
+
+    - name: "[Base] - upgrade all packages"
+      yum:
+        name: '*'
+        state: latest
+        update_cache: true
+
+    - name: "[Qemu/KVM] - install libvirt, kvm tools"
+      yum:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - virt-manager
+        - libvirt
+        - virt-install
+        - qemu-kvm
+        - xauth
+        - dejavu-lgc-sans-fonts
+        - virt-top
+        - libguestfs-tools
+        - virt-viewer
+        - virt-manager
+        - curl
+
+    - name: "[Qemu/KVM] - set symlink for kvm binary"
+      file:
+        src: /usr/libexec/qemu-kvm
+        dest: /usr/bin/qemu-system-x86_64
+        state: link
+
+    - name: "[Qemu/KVM] - group install Virtualization Host"
+      command: yum -y group install "Virtualization Host"
+
+    - name: "[HashiCorp Packer] - install yum-utils"
+      yum:
+        name: yum-utils
+        state: latest
+
+    - name: "[HashiCorp Packer] - add repository"
+      command: yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+
+    - name: "[HashiCorp Packer] - install packer"
+      yum:
+        name: packer
+        state: latest
+        update_cache: true
