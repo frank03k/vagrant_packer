@@ -1,0 +1,35 @@
+#cloud-config
+autoinstall:
+  version: 1
+  identity:
+    hostname: ubuntu2004
+    username: installer
+    password: $6$9YcRMVTCbzHRfmR8$rTcD7I322kbX3VEbe7HOKyTb4WJf2CkMzut5Bhz5BHfRexjzlFWNayYUTWoRL1gGJmVtAayGqYPW4sjOSDGeu/
+  ssh:
+    allow-pw: true
+    install-server: true
+  locale: en_US
+  keyboard: 
+    layout: gb
+  storage:
+    layout:
+      name: direct
+    config:
+      - type: disk
+        id: disk0
+        match:
+          size: largest
+      - type: partition
+        id: boot-partition
+        device: disk0
+        size: 500M
+      - type: partition
+        id: root-partition
+        device: disk0
+        size: -1
+  late-commands:
+    - "echo 'Defaults:installer !requiretty' > /target/etc/sudoers.d/installer"
+    - "echo 'installer ALL=(ALL) NOPASSWD: ALL' >> /target/etc/sudoers.d/installer"
+    - "chmod 440 /target/etc/sudoers.d/installer"
+
+    
