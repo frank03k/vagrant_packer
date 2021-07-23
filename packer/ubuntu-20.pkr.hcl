@@ -1,6 +1,6 @@
 variable "ssh_username" {
-   type    = string
-   default = ""
+  type    = string
+  default = ""
 }
 
 variable "ssh_password" {
@@ -35,10 +35,10 @@ source "qemu" "ubuntu" {
   boot_wait        = "10s"
   vnc_port_min     = 5901
   vnc_port_max     = 5901
-  boot_command     = ["<esc><wait><esc><wait><f6><wait><esc><wait>",
-                      "<bs><bs><bs><bs><bs>",
-                      "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ",
-                      "--- <enter>"]
+  boot_command = ["<esc><wait><esc><wait><f6><wait><esc><wait>",
+    "<bs><bs><bs><bs><bs>",
+    "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ",
+  "--- <enter>"]
 }
 
 build {
