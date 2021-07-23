@@ -1,9 +1,3 @@
----
-title: "Packer - Demo project for learning"
-author: "frank03k"
-date: "23-07-2021"
----
-
 # Packer - Demo project for learning
 
 ![Status](https://img.shields.io/badge/Status-DemoTutorial-orange) ![Packer Version](https://img.shields.io/badge/Packer-1.7.4-blue) ![Ansible Version](https://img.shields.io/badge/Ansible-2.11-green)
