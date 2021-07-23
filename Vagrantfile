@@ -14,7 +14,8 @@ Vagrant.configure("2") do |config|
         v.memory = 4096
         v.cpus = 4
         v.customize ["modifyvm", :id, "--nested-hw-virt", "on"]
-    end
+        v.customize ["modifyvm", :id, "--ioapic", "on"]
+      end
     end
     config.vm.provision "ansible" do |ansible|
         ansible.playbook = "provision.yml"
