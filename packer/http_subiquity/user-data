@@ -1,14 +1,19 @@
 #cloud-config
 autoinstall:
   version: 1
-  identity:
+  user-data:
     hostname: ubuntu2004
-    username: installer
-    password: $6$9YcRMVTCbzHRfmR8$rTcD7I322kbX3VEbe7HOKyTb4WJf2CkMzut5Bhz5BHfRexjzlFWNayYUTWoRL1gGJmVtAayGqYPW4sjOSDGeu/
+    users:
+      - name: installer
+        passwd: $6$kpUd9wTHa3xt.2Bz$EawasoHiv3Z8CD5l63dG2NnhuIorC0pCwznj0Gpt5m4jb4Z0iUJn26lR7BKaGAAtM6sqE9SfQ4jqzYUlZsXdX/
+        lock-passwd: false
+        groups: sudo
+        shell: /bin/bash
+        sudo: "ALL=(ALL) NOPASSWD:ALL"
+    locale: en_US
   ssh:
     allow-pw: true
     install-server: true
-  locale: en_US
   keyboard: 
     layout: gb
   storage:
